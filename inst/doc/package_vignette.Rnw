@@ -18,7 +18,7 @@
 \date{11 November 2013}
 
 % Vignette index entry
-%\VignetteIndexEntry Lloyd.et.al.Cell.abundance.metaanalysis
+%\VignetteIndexEntry{Lloyd.et.al.Cell.abundance.metaanalysis}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE, cache=TRUE}
