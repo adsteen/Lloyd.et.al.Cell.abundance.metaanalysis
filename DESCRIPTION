@@ -1,0 +1,41 @@
+Package: Lloyd.et.al.Cell.abundance.metaanalysis
+Type: Package
+Title: Put something in the title line
+Version: 0.9
+Date: 2013-09-02
+Author: Andrew D. Steen
+Maintainer: Andrew D. Steen <andrew.decker.steen@gmail.com>
+Description: Reproduces analysis from Lloyd et al manuscript about
+    meta-analysis of cell quantifications from seawater and marine sediments
+Depends:
+    ggplot2,
+    scales,
+    reshape2,
+    plyr,
+    grid,
+    gridExtra,
+    boot,
+    xlsx,
+    RColorBrewer,
+    segmented
+License: MIT license
+Collate:
+    'aov_perm_test.R'
+    'boxplots_by_perm.R'
+    'intertidal_yield_fig.R'
+    'make_qPCR_plots.R'
+    'make_sed_yield_boxplots.R'
+    'make_sw_yield_boxplots.R'
+    'plot_cell_vs_fish.R'
+    'read_data.R'
+    'reproduce_research.R'
+    'significance_labeller.R'
+    'single_sw_yield_boxplot.R'
+    'sw_depth_profiles.R'
+    'yield_by_core.R'
+    'Lloyd.et.al.Cell.abundance.metaanalysis.R'
+    'AIC_lik.R'
+    'sed_bac_and_arc_v_depth.R'
+    'sed_percent_arc_v_depth.R'
+    'lm_stats.R'
+    'qPCR_516_evaluation.R'

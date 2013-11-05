@@ -1,0 +1,205 @@
+\documentclass{article}
+
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{authblk}
+
+\title{Reproducing and extending the analysis of Lloyd et al (2013) with the \texttt{Lloyd.et.al.Cell.abundance.metaanalysis} package}
+%\author{Andrew D. Steen  \\ \texttt{andrew.decker.steen@gmail.com} \\
+%        \and
+%        Megan K. May \\
+%        \and
+%        Karen G. Lloyd}
+\author[1,2]{Andrew D. Steen}
+\author[2,3,4]{Megan K. May}
+\author[2]{Karen G. Lloyd}
+\affil[1]{\texttt{andrew.decker.steen@gmail.com}}
+\affil[2]{Department of Microbiology, University of Tennesse, Knoxville}
+\affil[3]{DePauw University}
+\affil[4]{Present address: Woods Hole Oceanographic Institution}
+
+\date{11 November 2013}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE, cache=TRUE}
+\maketitle
+
+\section{Introduction}
+This package allows users to reproduce, and more importantly to extend, the data analysis from the paper by Karen G. Lloyd, Megan K. May, Richard T. Kevorkian, and Andrew D. Steen (2013), ``Meta-analysis of quantification methods shows archaea and bacteria to be similarly abundant in the subseafloor'', Applied and Environmental Microbiology, doi: 10.1128/AEM.02090-13.
+
+\section{Reproducing the analysis}
+
+The simplest way to reproduce the entire analysis is to use
+
+<<eval=FALSE>>=
+invisible(reproduce_research, 
+          print_plots=TRUE, 
+          save_plots=TRUE, 
+          fast_calc=FALSE)
+@
+This will create all of the analysis in the paper, print and save plots and certain tables, and display some tables in the console output.
+
+This is a fine way to check our work, and we encourage it. However, the purpose of writing this package is to encourage \textbf{extensions} of our analysis, either by adding data to the database as it becomes avaialable, or by applying new analyses to the existing data set or to new data sets.  
+
+\section{Extending the analysis}
+In order to extend the analysis, it is useful to be able to:
+
+\begin{itemize}
+  \item Add data to our database
+  \item Run functions on our database (or an extended database) in isolation
+\end{itemize}
+
+\subsection{Working with our database}
+
+This package is built on two central databases, containing data from the water column and from sediments. These databases are similar, but not identical. These are included as two Microsoft Excel (\texttt{.xlsx}) files included as supplemental files to the journal article. Somewhat confusingly, they are encoded as three R objects (each included with the package as an \texttt{.RData} file). These files are:
+
+\begin{itemize}
+  \item \texttt{corrected\_sw} containing seawater data, and
+  \item \texttt{corrected\_seds} containing sediments data.
+  \item \texttt{all\_data}, containing concatenated seawater and sediments data, with a somewhat reduced set of columns. 
+\end{itemize}
+
+For most of the analysis, the more limited data frame is used when possible; the \texttt{all\_data} data frame is only used when necessary.
+
+These three objects are loaded using the function \texttt{read\_data()} - by default, this function will load the database that the paper is based on. Depending on the function arguments, it can be used to read data from an Excel file (which should have the same columns as the Excel file supplied with the paper), or from a different \texttt{.RData} file, if you have extended the databse. For instance, it might be easiest to add data to our database by extending the Microsoft Excel file supplied in the paper's supplemental, and saving the excel file with a new filename. Then, you would read that file into R using
+
+<<eval=FALSE>>=
+# Read in the modified database
+new_data_list <- read_data(reload.from.xlsx=TRUE, 
+                           seds_fn="myPath/mySeds.xlsx", 
+                           seds_sheet_name="Sheet1",
+                           sw_fn="myPath/mySw.xlsx", 
+                           sw_sheet_name="Sheet1")
+@
+
+Note that \texttt{read\_data()} does some processing of the Excel files in addition to reading them in, so you don't want to load the data simply using \texttt{read.xlsx()}.
+
+Ideally you should only read from Excel files when you have to, because reading Excel files into R is slow (ca. 4 minutes on my machine for both Excel files.) Therefore, once you have read in your modified database, save \texttt{corrected\_sw}, \texttt{corrected\_seds}, and \texttt{all\_data} as \texttt{.RData} files:
+
+<<eval=FALSE>>=
+save(all_data, file="myPath/all_data_modified.RData")
+save(corrected_sw, file="myPath/corrected_sw_modified.RData")
+save(corrected_seds, file="myPath/corrected_seds_modified.RData")
+@
+
+From now on, you can load your modified database using
+
+<<eval=FALSE>>=
+new_data_list <- read_data(reload.from.xlsx=FALSE,
+                           all_data_fn="myPath/all_data_modified.RData",
+                           corrected_sw_fn="myPath/ccorrected_sw_modified.RData",
+                           corrected_seds_fn="myPath/corrected_seds_modified")
+@
+
+\subsection{Performing one analysis at a time}
+Once the three central data frames are loaded using \texttt{read\_data()}, you can use or modify the functions included with the package to run one analysis at a time, or to write/extend your own analyses. In many cases, it may be simplest to call thes functions by stepping through \texttt{reproduce\_research()}; i.e. by opening the file and running it line-by-line as a script.
+
+The full list of functions included in the package follows. Each is documented separately. Access the documentation for each function using \texttt{?}. 
+
+\begin{itemize}
+  \item \texttt{AIC\_lik()}: Calculates log-liklihoods using the output of \texttt{AIC}
+  \item \texttt{aov\_perm\_test()}: Performs permutation test using Analysis of Variance
+  \item \texttt{boxplots\_by\_perm()}: Creates the plots in Fig 3, and calculates relevant statistics
+  \item \texttt{intertidal\_yield\_fig()}: Makes a figure of yields of FISH/CARD-FISH for intertidal sediments, analogous to Fig 2
+  \item \texttt{lm\_stats()}: A particularly useful function which returns a single-row data frame containing slope, intercept, standard errors, p-values, and more for a linear model of the form \texttt{yvar\textasciitilde xvar}
+  \item \texttt{make\_qPCR\_plots()}: Creates figure 4, about qPCR methods
+  \item \texttt{make\_sed\_yield\_boxplots()}: Makes boxplots of yield for sediments data (included in the supplemental), split by various methodological factors
+  \item \texttt{make\_sw\_yield\_boxplots()}: Makes boxplots of yield for seawater data (included in the supplemental), split by various methodological factors
+  \item \texttt{plot\_cell\_vs\_fish()}: Makes Figure 1
+  \item \texttt{qPCR\_516\_evaluation()}: Makes plot and calculates summary stats for qPCR using or not using 516 as a primer
+  \item \texttt{read\_data()}: Reads and formats cell abundance database
+  \item \texttt{reproduce\_research()}: Master function to reproduce all analysis in the paper
+  \item \texttt{sed\_bac\_and\_arc\_v\_depth()}: Makes plots and models of sediments bac and arc concentrations vs depth
+  \item \texttt{sed\_percent\_arc\_v\_depth()}: Make depth profiles and calculate linear models for sediment percent Archaea vs depth
+  \item \texttt{significance\_labeller()}: Create 'significance code' based on p values
+  \item \texttt{single\_sw\_yield\_boxplot()}: Function to make generic boxplots as in the supplemental figures
+  \item \texttt{sw\_depth\_profiles()}: Creates depth profiles in figures 5 a-c: Bacteria, Archaea, and Also performs breakpoint analysis
+  \item \texttt{yield\_by\_core()}: Create a boxplot of yield (total cells by *-FISH relative to total cells by direct count) for each core in the database
+\end{itemize}
+
+\section{Appendix: Columns in each data frame}
+\begin{longtable}{ccc}
+\caption{Columns and data types for the \textbf{all\_data} data frame.} \\
+%\begin{tabular}
+\hline 
+column name & data type & notes \\ \hline
+paper & factor & abbreviated text name of the reference \\
+depth & numeric & depth, m \\
+totalcells & numeric & cells per cm\textsuperscript{3} \footnote{When reported in other units (e.g. per gram sediment dry weight), these were adjusted to per cc.}\\
+qPCRtotal & numeric & 16s copies per cm\textsuperscript{3} \\
+Cell.stain & factor & \\
+CARDFISH.Bac.per.cc & numeric & cells per cm\textsuperscript{3} \\
+FISH.yield & numeric & *.FISH-counted cells / general-stain-counted cells \\
+Fraction.Arc.CARDFISH & numeric & $\text{Archaea} / (\text{Archaea}+\text{Bacteria})$ by CARDFISH \\
+Fish.or.CARDFISH & factor & also includes \texttt{"Polyribonucleotide FISH"} \\
+Fixative & factor & \\
+Bac.permeabilization & factor & \\
+Arc.permeabilization & factor & \\
+environment & factor & \texttt{"seawater"} or \texttt{"sediments"} \\
+qPCRbac & numeric &  \\
+qPCRarc & numeric &  \\
+Cell.stain.1 & factor & \\
+Bac.probe & factor & \\
+Arc.probe & factor & \\
+core & character & sediment core label \\
+qPCR.Bac.per.cc & numeric & copy number of Bacteria per cc by qPCR \\
+qPCR.Arc.per.cc & numeric & copy number of Archaea per cc by qPCR \\
+qPCRuniversal & numeric & copy number by qPCR using `universal' primers \\
+percentqPCR & numeric & fraction (not percent) of Archaea by qPCR \\
+SYBR.vs.Taqman & factor & qPCR probe \\
+DNA.extraction.procedure & factor & \\
+%\end{tabular}
+\end{longtable}
+
+\begin{longtable}{lll}%{l >{\raggedright}p{0.75\textwidth} }
+\caption{Columns and data types for the \textbf{corrected\_sw} data frame - only listing those columns that are not present in \texttt{all\_data} } \\
+\hline
+column name & data type & notes \\ \hline
+Sample & factor & identifier for samples within the paper\\ 
+Date & factor & mixed formats due to bad Excel entry \\
+qPCR.MCG..copies.mL.water. & numeric & \\
+Counting.method & factor & \texttt{"Microscope\-eye"} or \texttt{"Microscopy\-automated"}\\
+depth\_log10 & numeric & log 10-transformed depth\\
+\hline
+\end{longtable}
+
+\begin{longtable}{ccc}
+\caption{Columns and data types for the \textbf{corrected\_seds} data frame - only listing those columns that are not present in in \texttt{all\_data}} \\
+\hline
+column name & data type & notes \\ 
+\hline
+sulfate & factor & mostly numeric in mM, some text\\
+CARDFISH.Arc.nd & logical & were Archaea detected by CARDFISH?\\
+Bac.formamide & numeric & concentration formamide for Bacteria\\
+Arc.formamide & factor & concentration formamide for Archaea\\
+Sonication & factor & sonication protocol \\
+Average.cells.per.field & factor & includes text and numbers\\
+Filter & factor & filter type\\
+Bac.Probe & factor & Bacterial *-FISH probe\\
+Arc.Probe & factor & Archaeal *-FISH probe\\
+Arc.forward & factor & \\
+Arc.reverse & factor & \\
+TaqMan.Arc & factor & TaqMan probe for Archaea\\
+Bac.forward & factor & Bac.forward \\
+Bac.reverse & factor & \\
+Taqman.Bac & factor & \\
+Universal.forward & factor & \\
+Universal.reverse & factor & \\
+Taqman.Universal & factor & \\
+Arc.standard & factor & qPCR standard, Archaea\\
+Bac.standard & factor & qPCR standard, Bacteria\\
+Mud.volcano.or.seep. & logical & samples come from a mud volcano or seep\\
+Water.depth & numeric & water depth at sediment surface\\
+Environment.Type & character & \\
+Non.intertidal.marine... & logical & full name is much longer\\
+DNA.extraction.efficiency... & factor & full name is much longer\\
+Template.DNA.dilution.factor & factor & \\
+Uses.516.for.Arc & logical & \\
+Uses.349.for.Arc & logical & \\
+Uses.806.for.Arc & logical & \\
+Uses.331.for.Bac & logical & \\
+Uses.340.for.Bac & logical & \\
+Uses.515.for.Bac & logical & \\
+paperNumber & numeric & numeric label for each paper\\
+\end{longtable}
+\end{document}
