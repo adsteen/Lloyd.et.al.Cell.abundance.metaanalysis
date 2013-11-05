@@ -1,4 +1,4 @@
 Lloyd_et_al_cell_abundance_metaanalysis
 =======================================
 
-Code pertaining to a manuscript about a metaanalysis of cell quantification methods
+See vignette for overview of how to use this package.
