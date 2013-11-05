@@ -1,12 +1,11 @@
 Package: Lloyd.et.al.Cell.abundance.metaanalysis
 Type: Package
-Title: Put something in the title line
+Title: Package to reproduce analysis from Lloyd et al (2013), Applied and Environmental Microbiology
 Version: 0.9
-Date: 2013-09-02
-Author: Andrew D. Steen
+Date: 2013-11-05
+Author: Andrew D. Steen, Megan T. May, Karen G. Lloyf
 Maintainer: Andrew D. Steen <andrew.decker.steen@gmail.com>
-Description: Reproduces analysis from Lloyd et al manuscript about
-    meta-analysis of cell quantifications from seawater and marine sediments
+Description: Reproduces analysis from Lloyd et al (2013), Meta-analysis of quantification methods shows archaea and bacteria to be similarly abundant in the subseafloor
 Depends:
     ggplot2,
     scales,
