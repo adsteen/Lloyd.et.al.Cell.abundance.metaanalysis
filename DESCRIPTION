@@ -18,7 +18,7 @@ Depends:
     RColorBrewer,
     segmented
 License: MIT license
-LaxyData: true
+LazyData: true
 Collate:
     'aov_perm_test.R'
     'boxplots_by_perm.R'
