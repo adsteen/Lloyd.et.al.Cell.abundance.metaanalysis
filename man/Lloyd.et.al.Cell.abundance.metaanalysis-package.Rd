@@ -3,39 +3,36 @@
 \alias{Lloyd.et.al.Cell.abundance.metaanalysis}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Lloyd.et.al.Cell.abundance.metaanalysis
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Contains the database underlying the paper, and includes functions to reproduce all the analysis from the paper.
 }
 \details{
 \tabular{ll}{
 Package: \tab Lloyd.et.al.Cell.abundance.metaanalysis\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2013-09-02\cr
-License: \tab What license is it under?\cr
+Version: \tab 0.9\cr
+Date: \tab 2013-11-05\cr
+License: \tab MIT License\cr
 }
 This package contains the date contained in Lloyd et al 
 }
 \author{
 Andrew D. Steen
-
-Maintainer: Andrew D. Steen <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Maintainer: Andrew D. Steen <andrew.decker.steen@gmail.com>
 }
 \references{
-~~ Literature or other references for background information ~~
+Lloyd, Karen G., May, Megan T., Kevorkian, Richard T., and Steen, Andrew D. Metaanalysis of quantification methods shows archaea and bacteria to be similarly abundant in the subseafloor. Applied and Environmental Microbiology.
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
-~~ documentation directory ~~
+
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+data_list <- read_data()
+corrected_seds <- data_list$corrected_seds
+corrected_sw <- data_list$corrected_sw
+all_data <- data_list$all_data
+ggplot(all_data, aes(x=))
 }
