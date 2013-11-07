@@ -135,9 +135,9 @@ read_data <- function(reload.from.xlsx=FALSE, seds_fn, seds_sheet_name,
     # Rely on pre-saved versions of the RData file
     ######################
     print("Loading pre-saved data.")
-    load(all_data_fn)
-    load(corrected_seds_fn)
-    load(corrected_sw_fn)
+    data(all_data_fn)
+    data(corrected_seds_fn)
+    data(corrected_sw_fn)
   }
   
   # Strip out bad rows (with NA for paper; these are mostly empty rows that Bill Gates helpfully inserts at the end of the Excel file)
