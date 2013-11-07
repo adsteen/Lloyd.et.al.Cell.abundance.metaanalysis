@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  5 NOV 2013 16:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  6 NOV 2013 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -370,27 +370,27 @@ LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
 (Font)              Font shape `TS1/cmr/m/n' tried instead on input line 51.
 
 [2] [3]
-Overfull \hbox (64.77473pt too wide) in alignment at lines 130--153
+Overfull \hbox (64.77473pt too wide) in alignment at lines 132--155
  [] [] [] 
  []
 
 
-Overfull \hbox (64.77473pt too wide) in alignment at lines 153--161
+Overfull \hbox (64.77473pt too wide) in alignment at lines 155--163
  [] [] [] 
  []
 
 [4]
-Overfull \hbox (69.49727pt too wide) in alignment at lines 163--173
+Overfull \hbox (69.49727pt too wide) in alignment at lines 165--175
  [] [] [] 
  []
 
 
-Overfull \hbox (47.73569pt too wide) in alignment at lines 175--198
+Overfull \hbox (47.73569pt too wide) in alignment at lines 177--200
  [] [] [] 
  []
 
 
-Overfull \hbox (47.73569pt too wide) in alignment at lines 198--213
+Overfull \hbox (47.73569pt too wide) in alignment at lines 200--215
  [] [] [] 
  []
 
@@ -398,11 +398,11 @@ Overfull \hbox (47.73569pt too wide) in alignment at lines 198--213
 Here is how much of TeX's memory you used:
  3522 strings out of 493315
  48512 string characters out of 6137904
- 110032 words of memory out of 5000000
+ 111032 words of memory out of 5000000
  6864 multiletter control sequences out of 15000+600000
  37469 words of font info for 81 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,11n,23p,661b,280s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,11n,23p,719b,280s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts
 /enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2013/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/t
@@ -418,7 +418,7 @@ nts/cm/cmsltt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/cm-sup
 er/sfrm1000.pfb>
-Output written on Lloyd_et_al_vignette.pdf (6 pages, 165403 bytes).
+Output written on Lloyd_et_al_vignette.pdf (6 pages, 165751 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream

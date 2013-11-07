@@ -64,7 +64,9 @@ This package is built on two central databases, containing data from the water c
 
 For most of the analysis, the more limited data frame is used when possible; the \texttt{all\_data} data frame is only used when necessary.
 
-These three objects are loaded using the function \texttt{read\_data()} - by default, this function will load the database that the paper is based on. Depending on the function arguments, it can be used to read data from an Excel file (which should have the same columns as the Excel file supplied with the paper), or from a different \texttt{.RData} file, if you have extended the databse. For instance, it might be easiest to add data to our database by extending the Microsoft Excel file supplied in the paper's supplemental, and saving the excel file with a new filename. Then, you would read that file into R using
+The original versions of these data sets are loaded (via lazy loading) when the package is loaded. Thus, to access the original dataset you may call \texttt{all\_data}, \texttt{corrected\_sw}, or \texttt{corrected\_seds} once the package is loaded. 
+
+You may create versions of these data frames based on new underlying databases. To do this, use the function \texttt{read\_data()}. By default, this function will load the database that the paper is based on. Depending on the function arguments, it can be used to read data from an Excel file (which should have the same columns as the Excel file supplied with the paper), or from a different \texttt{.RData} file, if you have extended the databse. For instance, it might be easiest to add data to our database by extending the Microsoft Excel file supplied in the paper's supplemental, and saving the excel file with a new filename. Then, you would read that file into R using
 
 \begin{Schunk}
 \begin{Sinput}
